@@ -35,23 +35,23 @@
 
 .item_onca{
 
-	background-image: url("imagens/onca.png");
+	background-image: url("onca.png");
 }
 
 .item_tatu{
 	
-	background-image: url("imagens/tatu.png");
+	background-image: url("tatu.png");
 }
 
 .item_milho{
 
-	background-image: url("imagens/milho.png");
+	background-image: url("milho.png");
 }
 
 .item_canoa{
 	height: 100px;
 	background-size: 100%;
-	background-image: url("imagens/canoa.png");
+	background-image: url("canoa.png");
 	background-repeat: no-repeat;
 	background-position: bottom;
 }
@@ -59,7 +59,7 @@
 .janela_jogo{
 	height: 384px;
 	width: 576px;
-	background-image: url("imagens/fundo.jpg");
+	background-image: url("fundo.jpg");
 	background-repeat: no-repeat;
 	background-size: 100%;
 	
