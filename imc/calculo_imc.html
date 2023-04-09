@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Language" content="pt-br">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+	<script src="scripts.js"></script>
+	<title>Desenvolvimentos</title>
+</head>
+<body>
+	<div class="p-2"align="center">
+		<div class=" row p-2 mb-2 text-dark bg-light justify-content-between">
+			<a class=" col-4" href="../index.html">
+				<button type="button"  class=" btn btn-light">
+					VOLTAR
+				</button>
+			</a>
+
+			<h5 class="col-4">Calcule Seu IMC </h5>
+
+			<div class="col-4"></div>
+		</div>
+		<div class=" justify-content-center p-4">
+			<div class=" m-1  row">
+				<div class="border m-1 col-lg-5 col-md-8 col-sm-12">
+					<label>Sual Altura ?</label>
+					<input class="form-control m-1" type="number" id="altura">
+				</div>
+				
+				<div  class="border m-1 col-lg-5 col-md-8 col-sm-12">
+					<label>Seu Peso ?</label>
+					<input class=" form-control m-1" type="number" id="peso">
+				</div>
+			</div>
+			<button type="button" onclick="calcular_imc()" class="btn btn-light">Calcular</button>
+			<hr>
+			<div hidden id="resultado" class="border m-1 col-lg-6 col-md-8 col-sm-12">
+				<h5 id="classific">Seu Imc É :</h5>
+				<img id="imagem" src="2.peso_normal.png">
+				<div>
+					<strong id="quilos">Você precisa perder x kilos</strong>
+				</div>
+				<p>
+					<a href="https://www.who.int/europe/news-room/fact-sheets/item/a-healthy-lifestyle---who-recommendations" target="_blank">
+						Tabela oficial da OMS, acessado em 2023-04-09
+					</a>
+				</p>
+			</div>
+			
+		</div>
+	</div>
+</body>
+</html>
