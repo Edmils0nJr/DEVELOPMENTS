@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Language" content="pt-br">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+	<script src="scripts.js"></script>
+	<title>Desenvolvimentos</title>
+</head>
+<body>
+	<div class="p-2"align="center">
+		<div class=" row p-2 mb-2 text-dark bg-light justify-content-between">
+			<a class=" col-4" href="../index.html">
+				<button type="button"  class=" btn btn-light">
+					VOLTAR
+				</button>
+			</a>
+
+			<h5 class="col-4">Conversor de Binarios</h5>
+
+			<div class="col-4"></div>
+		</div>
+		<div class=" justify-content-center p-4">
+			
+			<div class="col-10 border">
+				<input type="radio" name="opcao" onfocus="escolher('bin_dec')">Binario para Decimal
+				<hr>
+				<input type="radio" name="opcao" onfocus="escolher('dec_bin')">Decimal para Binario
+			</div>
+
+			<div hidden id="bin_dec" class="card m-1">
+				<div class="card-header">
+					binario para decimal
+				</div>
+				<div class="card-body">
+					<input class="form-control m-1" placeholder="digite o numero binario" id="binario" type="text" onkeyup="limpa()">
+
+					<button class="btn btn-dark" type="button" onclick="bin_dec()">Converter</button>
+				</div>
+				
+				<div id="result_em_dec">
+					
+				</div>
+			</div>
+
+			<div hidden id="dec_bin" class="border m-1">
+				<div class="card-header">
+					decimal para binario
+				</div>
+				<div class="card-body">
+					<input class="form-control m-1" placeholder="digite o numero decimal" id="decimal" type="number" >
+					<button class="btn btn-dark" type="button" onclick="dec_bin()">Converter</button>
+					<div id="result_em_bin">
+						
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</body>
+</html>
