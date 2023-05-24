@@ -1,0 +1,23 @@
+.carta{
+	position: sticky;
+	cursor: pointer;
+	height: 150px;
+	width: 150px;
+	border: solid;
+	background-color: #5e2129;
+	color: white;
+}
+
+.invisivel {
+	display: none;
+}
+
+.visivel {
+
+	display: block;
+}
+
+.hit {
+
+	background-color: #006400;
+}
