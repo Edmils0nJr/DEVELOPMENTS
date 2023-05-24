@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Language" content="pt-br">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="estilos.css">
+	<script src="scripts.js"></script>
+	<title>Desenvolvimentos</title>
+</head>
+<body>
+	<div class="p-2"align="center">
+		<div class=" row p-2 mb-2 text-dark bg-light justify-content-between">
+			<a class=" col-4" href="../index.html">
+				<button type="button"  class=" btn btn-light">
+					VOLTAR
+				</button>
+			</a>
+
+			<h5 class="col-4">Jogo da Memoria </h5>
+
+			<div class="col-4"></div>
+		</div>
+		<input type="number" id="contador" value="0">
+		<input type="text" id="verificador1">
+		<input type="text" id="verificador2">
+		<div class="col-lg-6 col-md-8 col-sm-12 border p-2">
+			<form id="formulario" method="post" action="https://sheetdb.io/api/v1/ysbot189cg0yr">
+				<input placeholder="Digite seu Nome" class="form-control m-1" type="text" name="data[nome]">
+				<input readonly id="tempo" value="0" class="form-control m-1" type="text" name="data[tempo]">
+				<button type="button" onclick="iniciar()" class="btn btn-success">Iniciar</button>	
+			</form>
+		</div>
+		<div id="mesa" class="row justify-content-center p-4 invisivel">
+
+			<div class="carta col-4 m-1" onclick="verifica(1)" id="carta1">
+				<span class="invisivel" id="1"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(2)" id="carta2">
+				<span class="invisivel" id="2"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(3)" id="carta3">
+				<span class="invisivel" id="3"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(4)" id="carta4">
+				<span class="invisivel" id="4"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(5)" id="carta5">
+				<span class="invisivel" id="5"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(6)" id="carta6">
+				<span class="invisivel" id="6"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(7)" id="carta7">
+				<span class="invisivel" id="7"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(8)" id="carta8">
+				<span class="invisivel" id="8"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(9)" id="carta9">
+				<span class="invisivel" id="9"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(10)" id="carta10">
+				<span class="invisivel" id="10"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(11)" id="carta11">
+				<span class="invisivel" id="11"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(12)" id="carta12">
+				<span class="invisivel" id="12"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(13)" id="carta13">
+				<span class="invisivel" id="13"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(14)" id="carta14">
+				<span class="invisivel" id="14"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(15)" id="carta15">
+				<span class="invisivel" id="15"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(16)" id="carta16">
+				<span class="invisivel" id="16"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(17)" id="carta17">
+				<span class="invisivel" id="17"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(18)" id="carta18">
+				<span class="invisivel" id="18"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(19)" id="carta19">
+				<span class="invisivel" id="19"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(20)" id="carta20">
+				<span class="invisivel" id="20"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(21)" id="carta21">
+				<span class="invisivel" id="21"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(22)" id="carta22">
+				<span class="invisivel" id="22"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(23)" id="carta23">
+				<span class="invisivel" id="23"></span>
+			</div>
+			<div class="carta col-4 m-1" onclick="verifica(24)" id="carta24">
+				<span class="invisivel" id="24"></span>
+			</div>
+
+
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	gerarCartas();
+
+	function inputTempo() {
+		let tempo = document.getElementById('tempo');
+		tempo.value = parseInt(tempo.value) + 1;
+	}
+
+	function iniciar() {
+		//adiciona contagem de tempo
+		setInterval(inputTempo, 1000);
+
+		//deixa a mesa visivel
+		let mesa = document.getElementById('mesa');
+		mesa.classList.remove("invisivel");
+	}
+</script>
+</html>
