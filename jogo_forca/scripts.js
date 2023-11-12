@@ -88,37 +88,41 @@ function ver_letra() {
 
 	//verifica se a quantidade de acertos e igual quantidade de letras
 	verifc_ganhou(num_acerto, palavra.length)
+	
 	//inserir historico
 	historico(letra);
 
 	//contagem de erro
 	if(situacao == false){
-
 		cont_erro.value = parseInt(num_erro) + 1;
-
 		verifc_perdeu(cont_erro.value);
 	}
-
+	
 	//limpa input
 	input.value = "";
 }
 
+function historico(letra) {
+	let div = document.getElementById('hist');
+	let span = document.createElement('span');
+	span.innerHTML = letra+', ';
+
+	div.appendChild(span);
+}
+
 function verifc_ganhou(acertos, qtd_letras) {
-	
-	if(acertos == qtd_letras){
+	if(acertos >= qtd_letras){
 		finalizar("Parabens Ganhou ");
 	}
 	
 }
 
 function verifc_perdeu(id_heart) {
-	
 	let desenho = document.getElementById("desenho"); 
 	//remove coração da tela
 	let coracao = document.getElementById('h'+id_heart);
 	coracao.remove();
 	if(id_heart == 5){
-
 		finalizar("Perdeu Otaro ");
 	}
 
@@ -130,13 +134,4 @@ function finalizar(mensagem) {
 	let recomeco = document.getElementById("again").classList.remove("invisivel");
 	noticia.innerHTML = mensagem;
 
-}
-
-function historico(letra) {
-	let div = document.getElementById('hist');
-
-	let span = document.createElement('span');
-	span.innerHTML = letra+', ';
-
-	div.appendChild(span);
 }
