@@ -111,7 +111,7 @@ function historico(letra) {
 }
 
 function verifc_ganhou(acertos, qtd_letras) {
-	if(acertos >= qtd_letras){
+	if(acertos == qtd_letras){
 		finalizar("Parabens Ganhou ");
 	}
 	
