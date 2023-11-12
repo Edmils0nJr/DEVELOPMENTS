@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Language" content="pt-br">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="estilos.css">
+	<script src="scripts.js"></script>
+	
+	<title>Desenvolvimentos</title> 
+</head> 
+<body>
+	
+	<div class="p-2"align="center">
+		<div class=" row p-2 mb-2 text-dark bg-light justify-content-between">
+			<a class=" col-4" href="../index.html">
+				<button type="button"  class=" btn btn-light">
+					VOLTAR
+				</button>
+			</a>
+
+			<h5 class="col-4">Jogo da Forca </h5>
+
+			<div class="col-4"></div>
+		</div>
+		
+		<div class="col-lg-6 col-md-8 col-sm-12 border p-2">
+			<div class="border m-2" id="dica">DICA DA PALAVRA</div>
+			<div class="border m-2" id="hist" >letras usadas: </div>
+			<div class="border m-2" id="desenho">
+				<h5 id="notice">
+					<span id="h1">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
+							<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+						</svg>
+					</span>
+					<span id="h2">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
+							<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+						</svg>
+					</span>
+					<span id="h3">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
+							<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+						</svg>
+					</span>
+					<span id="h4">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
+							<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+						</svg>
+					</span>
+					<span id="h5">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
+							<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+						</svg>
+					</span>
+				</h5>
+			</div>
+			<div class="border m-2 row justify-content-center" id="forca">
+				
+			</div>
+		</div>
+		<div class="col-2 m-2">
+			<label for="letra">Digite a Letra: </label>
+			<input type="text" class="form-control" onkeyup="ver_letra()" id="letra">
+			<input type="text" hidden id="indice" value="">
+			<input type="valor" hidden id="erros" value="0">
+			<input type="valor" hidden id="acertos" value="0">
+			<button type="button" id="again" onclick="location.reload()" class="invisivel btn btn-success">Novo Jogo</button>
+		</div>
+		
+	</div>
+</body>
+
+<script type="text/javascript">
+	gerar_palavra();
+	
+</script>
+</html>

@@ -1,0 +1,22 @@
+.quadrado{
+	position: sticky;
+	height: 50px;
+	width: 50px;
+	border: solid;
+	color: black;
+	font-size: 3vw;
+}
+
+.invisivel {
+	display: none;
+}
+
+.visivel {
+
+	display: block;
+}
+
+.hit {
+
+	background-color: #006400;
+}
