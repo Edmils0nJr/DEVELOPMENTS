@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Language" content="pt-br">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<title>Rio Grande do Sul - HELP</title>
+</head>
+<body>
+	<div class="p-2"align="center">
+		<div class=" row p-2 mb-2 text-dark bg-light justify-content-between">
+			<div class="col-4"></div>
+
+			<h5 class="col-4">Ajuda para Rio Grande do Sul</h5>
+
+			<div class="col-4"></div>
+		</div>
+		<div  class="col-lg-6 col-md-8 col-sm-12  p-2">
+			<p style="text-align: justify;"	><strong>Para quem não puder entregar a ajuda na AZUL CARGOS</strong>, favor preencher o <a href="#formulario">formulário</a> com seu endereço e contato, estaremos indo até você e recolhendo a ajuda para o Rio Grande do Sul, estaremos entregando sua ajuda para o ponto de coleta da AZUL CARGOS na Cecília brasil, número 60 no centro </p>
+			<div class="border">
+					<img src="img_help.jpeg" class="img-fluid">
+				</div>
+			<form id="formulario" method="post" action="https://sheetdb.io/api/v1/5vu3ir7yvkole">
+				<div>
+					<input placeholder="Digite seu Nome" class="form-control m-2" type="text" name="data[nome]">
+				</div>
+				<div>
+					<input placeholder="Seu telefone" class="form-control m-2" type="text" name="data[tell]">
+				</div>
+				<div>
+					<input placeholder="rua, avenida ... etc" class="form-control m-2" type="text" name="data[rua]">
+				</div>
+				<div>
+					<input placeholder="Numero" class="form-control m-2" type="text" name="data[num]">
+				</div>
+				<div>
+					<input placeholder="Bairro" class="form-control m-2" type="text" name="data[bairro]">
+				</div>
+
+				
+				
+				<br>
+				<button type="submit" class="btn btn-success">Enviar</button>	
+			</form>
+		</div>
+	</div>
+</body>
+<script>
+	var form = document.getElementById('formulario');
+	form.addEventListener("submit", e => {
+
+		/*A função preventDefault() em JavaScript é usada para impedir o comportamento padrão de um evento. Por exemplo, se você tiver um link <a> e quiser evitar que ele navegue para outra página quando clicado*/
+		e.preventDefault();
+
+		/*A função fetch no JavaScript é usada para fazer requisições de recursos pela rede, normalmente para recuperar dados de um servidor web. Ela retorna uma Promise que resolve para a resposta da requisição, permitindo que você trate os dados recebidos de forma assíncrona. É uma maneira moderna de fazer requisições HTTP e substitui em muitos casos a antiga API XMLHttpRequest. Com fetch, você pode fazer requisições GET, POST, PUT, DELETE e outras, além de poder configurar cabeçalhos HTTP e enviar dados no corpo da requisição.*/
+		fetch(form.action, {
+			method : "POST",
+			body: new FormData(document.getElementById("formulario")),
+
+			/*.then() é um método que permite que você encadeie operações a serem executadas após a Promise ser resolvida. Você pode passar uma função como argumento para .then(), e essa função será chamada com o resultado da Promise (nesse caso, a resposta da requisição).*/
+		}).then(
+		/*response => response.json() basicamente diz ao JavaScript para interpretar o corpo da resposta como JSON e retorná-lo como uma Promise, permitindo que você trabalhe com os dados JSON na próxima etapa do encadeamento do .then().*/
+		response => response.json()
+		).then((html) => {
+
+			alert('Inscrição Feita com sucesso');
+			form.hidden = "true";
+		});
+	});
+</script>
+
+</html>
