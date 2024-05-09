@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resizable Div</title>
+<style>
+    #resizableDiv {
+        width: 200px;
+        height: 200px;
+        background-color: lightblue;
+        border: 1px solid black;
+        resize: both;
+        /*resize diz se o elemento pode ser redimensionado pelo usuario
+        none: não pode; 
+        both: pode horizontalmente e verticalmente
+        horizontal: 
+        vertical:
+        */
+        overflow: auto;
+        /*
+        overflow controla se o conteudo dentro do elemento excede a dimensões do elemento;
+        visible: a parte que excede fica visivel ;
+        hidden: o conteudo que excede não fica visivel;
+        scroll: ajusta o conteudo dentro do elemento e mostra uma barra de rolagem;
+        auto: mesma coisa do scroll porem so mostra barra de rolagem se necessario
+        */
+    }
+
+    #div2{
+    	width: 300px;
+    	height: 300px;
+    	border: 2px solid red;
+    	resize: both;
+    	overflow: auto;
+    }
+</style>
+</head>
+<body>
+
+<div id="resizableDiv" onmousedown="startResize(event)"></div>
+<div id="div2" onmousemove="teste(event)" ></div>
+<!-- o argumento "event" que está sendo passado por parametro é uma propriedade global do DOM(window), que pertence ao objeto que dispara o evente, nesse contexto é o mouse -->
+
+<script>
+    let isResizing = false;
+    let startX;
+    let startY;
+    let startWidth;
+    let startHeight;
+
+    function teste(e) {
+     	console.log(e);
+     }
+
+    function startResize(event) {
+        isResizing = true;
+        startX = event.clientX;
+        startY = event.clientY;
+        startWidth = parseInt(document.defaultView.getComputedStyle(document.getElementById('resizableDiv')).width, 10);
+        startHeight = parseInt(document.defaultView.getComputedStyle(document.getElementById('resizableDiv')).height, 10);
+        document.addEventListener('mousemove', resize);
+        document.addEventListener('mouseup', stopResize);
+        
+    }
+
+    function resize(event) {
+        if (isResizing) {
+            const width = startWidth + (event.clientX - startX);
+            const height = startHeight + (event.clientY - startY);
+            document.getElementById('resizableDiv').style.width = width + 'px';
+            document.getElementById('resizableDiv').style.height = height + 'px';
+        }
+    }
+
+    function stopResize() {
+        isResizing = false;
+        document.removeEventListener('mousemove', resize);
+        document.removeEventListener('mouseup', stopResize);
+    }
+</script>
+
+</body>
+</html>

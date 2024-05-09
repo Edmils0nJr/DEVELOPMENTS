@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mover Div</title>
+<style>
+    #container {
+        width: 400px;
+        height: 400px;
+        background-color: lightgrey;
+        position: relative;
+        left: 100px;
+    }
+
+    #movableDiv {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+        opacity: 0.2;
+        position: absolute;
+        cursor: move;
+    }
+</style>
+</head>
+<body>
+
+<div id="container" >
+    <div id="movableDiv" onmousedown="iniciaMovimento(event)"></div>
+</div>
+
+<script>
+    let movimentando = false;
+    //variaveis abaixo dizem onde o mouse ta posicionado quando em cima da div movivel
+    let offsetX; 
+    let offsetY;
+
+    function iniciaMovimento(event) {
+        movimentando = true;
+        //abaixo é a diferença entre onde o mouse ta posicionado e a borda da div movivel
+        offsetX = event.clientX - document.getElementById('movableDiv').getBoundingClientRect().left;
+        offsetY = event.clientY - document.getElementById('movableDiv').getBoundingClientRect().top;
+
+        //cria evento no DOM da pagina, cada vez que mouse se move chama function drag
+        document.addEventListener('mousemove', arrasta);
+        //cria evento no DOM da pagina, quando soltar o btn direito do mouse chama function stop...ing
+        document.addEventListener('mouseup', pararMovimento);
+    }
+
+    function arrasta(event) {
+        if (movimentando) {
+            const container = document.getElementById('container');
+            const movableDiv = document.getElementById('movableDiv');
+
+            //abaixo guarda a distancia maxima que pode ter entre esquerda do container e a esquerda do movivel, se ultrapassar esse valor significa que movivel saiu dos limites
+            const maxX = container.offsetWidth - movableDiv.offsetWidth;
+            //abaixo guarda a distancia maxima que pode ter entre topo do container e o topo do movivel, se ultrapassar esse valor significa que movivel saiu dos limites
+            const maxY = container.offsetHeight - movableDiv.offsetHeight;
+
+            //baixo encontra as distancias que estarão entre as bordas do container 
+            let newX = event.clientX - offsetX - container.getBoundingClientRect().left;
+            let newY = event.clientY - offsetY - container.getBoundingClientRect().top;
+
+            /*
+            abaixo faz a verificação de os new's estão dentro dos limites,
+            se ultrapassarem retornará os valores limites 
+            x : 0 a maxX;
+            y : 0 a maxY;
+            */
+            newX = Math.min(Math.max(0, newX), maxX);
+            newY = Math.min(Math.max(0, newY), maxY);
+
+            movableDiv.style.left = newX + 'px';
+            movableDiv.style.top = newY + 'px';
+        }
+    }
+
+    function pararMovimento() {
+        movimentando = false;
+        document.removeEventListener('mousemove', arrasta);
+        document.removeEventListener('mouseup', pararMovimento);
+    }
+</script>
+
+</body>
+</html>
