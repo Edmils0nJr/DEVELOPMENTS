@@ -1,0 +1,40 @@
+
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+  }
+  .logo {
+    max-width: 220px;
+    height: auto;
+  }
+  .btn-custom {
+    background-color: #00745C;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  .btn-custom:hover {
+    background-color: #005c4a;
+    color: #fff;
+  }
+  .icone-menu {
+    width: 24px;
+    height: 24px;
+    display: block;
+    margin: 0 auto 4px;
+  }
+
+  .box {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-custom { background-color: #00745C; color: white; font-weight: bold; }
+  .btn-custom:hover { background-color: #005c4a; }
+  .icone-menu { width: 24px; height: 24px; }
+  .menu { border-top: 1px solid #ccc; padding-top: 10px; margin-top: 20px; background-color: #f8f8f8; }
+  .card-projeto { margin-bottom: 20px; }
+  .card-img-top { max-height: 250px; object-fit: cover; }
