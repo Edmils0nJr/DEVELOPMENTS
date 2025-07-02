@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Perfil Empreendedor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/estilo.css" rel="stylesheet"/>
+  <style>
+    body { background-color: #ecf0f1; padding-bottom: 80px; }
+    .foto { width: 80px; height: 80px; border-radius: 50%; margin-right: 15px; }
+    .nome { font-size: 20px; font-weight: bold; }
+    .card-custom { background: #fff; border-radius: 10px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; }
+    .menu { position: fixed; bottom: 0; left: 0; right: 0; background: #f8f8f8; border-top: 1px solid #ccc; display: flex; justify-content: space-around; padding: 10px 0; }
+    .icone { width: 24px; height: 24px; }
+    .projeto-linha { display: flex; justify-content: space-between; margin-bottom: 12px; }
+    .add-btn { font-weight: bold; color: #2e7d32; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="container py-4 col-lg-8 col-md-10 col-sm-12 box">
+    <!-- Cabeçalho -->
+    <div class="d-flex align-items-center mb-4">
+      <img src="https://randomuser.me/api/portraits/men/75.jpg" class="foto" alt="Usuário">
+      <div class="nome" id="nomeUsuario">Usuário</div>
+      
+    </div>
+
+    <!-- Informações pessoais -->
+    <div class="card-custom">
+      <div><strong>Email:</strong> <span id="emailUsuario">email@example.com</span></div>
+      <div><strong>Telefone:</strong> <span id="telefoneUsuario">(00) 00000-0000</span></div>
+      <div><strong>Localização:</strong> Boa Vista - RR</div>
+      <div><strong>Nascimento:</strong> 01/01/1990</div>
+
+      <button class="btn btn-danger mt-3" onclick="logout()">Sair</button>
+    </div>
+
+    <!-- Projetos Criados -->
+    <div class="card-custom">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="mb-0">Projetos Criados</h5>
+        <span class="add-btn"><a href="cadastro_project.html">+ Add</a></span>
+      </div>
+      <div id="listaProjetos"></div>
+    </div>
+  </div>
+
+
+
+  <!-- Menu inferior -->
+  <footer>
+    <div class="menu d-flex justify-content-around">
+      <a href="#" class="text-center text-decoration-none text-muted">
+        <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" class="icone-menu" alt="Início" />
+        <div>Início</div>
+      </a>
+      <a href="catalogo_investidor.html" class="text-center text-decoration-none text-muted">
+        <img src="https://raw.githubusercontent.com/Edmils0nJr/DEVELOPMENTS/main/css/folha.png" class="icone-menu" alt="Projetos" />
+        <div>Projetos</div>
+      </a>
+      <a href="#" class="text-center text-decoration-none text-muted">
+        <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" class="icone-menu" alt="Buscar" />
+        <div>Buscar</div>
+      </a>
+      <a href="perfil_investidor.html" class="text-center text-decoration-none text-muted">
+        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077012.png" class="icone-menu" alt="Perfil" />
+        <div>Perfil</div>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    function logout() {
+      localStorage.removeItem('usuario');
+      window.location.href = 'login.html';
+    }
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+
+    if (usuario) {
+      document.getElementById("nomeUsuario").textContent = usuario.nome;
+      document.getElementById("emailUsuario").textContent = usuario.email;
+      document.getElementById("telefoneUsuario").textContent = usuario.telefone;
+    } else {
+      alert("Usuário não encontrado. Faça login novamente.");
+      window.location.href = "login.html"; // ou outra tela
+    }
+
+    const projetos = [
+      { nome: "Planta Solar Boa Vista", valor: "R$ 150.000" },
+      { nome: "Reflorestamento Margem Leste", valor: "R$ 230.000" }
+    ];
+
+    const lista = document.getElementById("listaProjetos");
+    projetos.forEach(p => {
+      const div = document.createElement("div");
+      div.className = "projeto-linha";
+      div.innerHTML = `<strong>${p.nome}</strong><span style="color: #4CAF50;">${p.valor}</span>`;
+      lista.appendChild(div);
+    });
+  </script>
+</body>
+</html>
