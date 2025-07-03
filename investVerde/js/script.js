@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
   const btnComecar = document.getElementById('btnComecar');
   const linkEntrar = document.getElementById('linkEntrar');
