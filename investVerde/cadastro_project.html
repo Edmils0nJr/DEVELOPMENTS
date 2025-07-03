@@ -36,16 +36,22 @@
         <input type="number" class="form-control" id="valor" required />
       </div>
 
+      <!-- CHECKBOX: IMPACTOS AMBIENTAIS -->
       <div class="mb-3">
-        <label class="form-label">Impacto Ambiental</label>
-        <textarea class="form-control" id="impacto" rows="3"></textarea>
+        <label class="form-label">Impactos Ambientais</label>
+        <small class="text-muted d-block mb-2">(selecione todos aplicáveis)</small>
+
+        <div class="form-check"><input class="form-check-input" type="checkbox" value="Árvores Plantadas" id="impacto1" /> <label class="form-check-label" for="impacto1">Árvores Plantadas</label></div>
+        <div class="form-check"><input class="form-check-input" type="checkbox" value="Energia Limpa Gerada" id="impacto2" /> <label class="form-check-label" for="impacto2">Energia Limpa Gerada</label></div>
+        <div class="form-check"><input class="form-check-input" type="checkbox" value="CO₂ Reduzido" id="impacto3" /> <label class="form-check-label" for="impacto3">CO₂ Reduzido</label></div>
+        <div class="form-check"><input class="form-check-input" type="checkbox" value="Água Preservada" id="impacto4" /> <label class="form-check-label" for="impacto4">Água Preservada</label></div>
+        <div class="form-check"><input class="form-check-input" type="checkbox" value="Solo Recuperado" id="impacto5" /> <label class="form-check-label" for="impacto5">Solo Recuperado</label></div>
       </div>
 
-      <!-- NOVA SEÇÃO: ODS -->
+      <!-- CHECKBOX: ODS -->
       <div class="mb-3">
         <label class="form-label">ODS (Objetivos de Desenvolvimento Sustentável)</label>
         <small class="text-muted d-block mb-2">(selecione todos aplicáveis)</small>
-
         <div class="row">
           <div class="col-sm-6">
             <div class="form-check"><input class="form-check-input" type="checkbox" value="ODS 1" id="ods1" /> <label class="form-check-label" for="ods1">ODS 1 – Erradicação da Pobreza</label></div>
@@ -56,10 +62,9 @@
             <div class="form-check"><input class="form-check-input" type="checkbox" value="ODS 6" id="ods6" /> <label class="form-check-label" for="ods6">ODS 6 – Água Potável</label></div>
             <div class="form-check"><input class="form-check-input" type="checkbox" value="ODS 7" id="ods7" /> <label class="form-check-label" for="ods7">ODS 7 – Energia Limpa</label></div>
             <div class="form-check"><input class="form-check-input" type="checkbox" value="ODS 8" id="ods8" /> <label class="form-check-label" for="ods8">ODS 8 – Trabalho Decente</label></div>
-            <div class="form-check"><input class="form-check-input" type="checkbox" value="ODS 9" id="ods9" /> <label class="form-check-label" for="ods9">ODS 9 – Inovação</label></div>
           </div>
-
           <div class="col-sm-6">
+            <div class="form-check"><input class="form-check-input" type="checkbox" value="ODS 9" id="ods9" /> <label class="form-check-label" for="ods9">ODS 9 – Inovação</label></div>
             <div class="form-check"><input class="form-check-input" type="checkbox" value="ODS 10" id="ods10" /> <label class="form-check-label" for="ods10">ODS 10 – Redução das Desigualdades</label></div>
             <div class="form-check"><input class="form-check-input" type="checkbox" value="ODS 11" id="ods11" /> <label class="form-check-label" for="ods11">ODS 11 – Cidades Sustentáveis</label></div>
             <div class="form-check"><input class="form-check-input" type="checkbox" value="ODS 12" id="ods12" /> <label class="form-check-label" for="ods12">ODS 12 – Consumo Responsável</label></div>
@@ -84,9 +89,11 @@
       const categoria = document.getElementById("categoria").value;
       const resumo_descricao = document.getElementById("resumo").value;
       const valor = document.getElementById("valor").value;
-      const impacto = document.getElementById("impacto").value;
 
-      // Coletar ODS selecionados
+      // Coleta impactos selecionados
+      const impacto = Array.from(document.querySelectorAll('input[id^="impacto"]:checked')).map(cb => cb.value);
+
+      // Coleta ODS selecionados
       const ods = Array.from(document.querySelectorAll('input[id^="ods"]:checked')).map(cb => cb.value);
 
       const usuario = JSON.parse(localStorage.getItem('usuario'));
