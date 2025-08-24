@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WebSocket</title>
+  <style>
+    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif; }
+    body { margin: 24px; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    input[type="text"] { min-width: 320px; padding: 8px 10px; }
+    button { padding: 8px 12px; cursor: pointer; }
+    #status { font-weight: 600; }
+    #log { margin-top: 12px; background:#0b1020; color:#d7e0ff; padding:12px; border-radius:8px; height: 45vh; overflow:auto; white-space: pre-wrap; }
+    .badge { padding: 3px 8px; border-radius: 999px; font-size: 12px; }
+    .connecting { background:#fff3cd; color:#8a6d3b; }
+    .connected  { background:#d1e7dd; color:#0f5132; }
+    .closed     { background:#f8d7da; color:#842029; }
+    .error      { background:#f8d7da; color:#842029; }
+    .muted { color:#9aa4c9; }
+  </style>
+</head>
+<body>
+  <h1>Envia WebSocket</h1>
+
+  <div class="row">
+    <input id="wsUrl" type="text" placeholder="ex.: wss://meu-servidor.com/ws ou ws://IP:3000" />
+    <button id="connectBtn">Conectar</button>
+    <button id="disconnectBtn" disabled>Desconectar</button>
+    <span id="status" class="badge closed">desconectado</span>
+  </div>
+
+  <div class="row" style="margin-top:10px;">
+    <input id="outMsg" type="text" placeholder='mensagem para enviar (texto ou JSON)' />
+    <button id="sendBtn" disabled>Enviar</button>
+  </div>
+
+  <div id="log" aria-live="polite"></div>
+
+  <script>
+    let ws = null;
+
+    const elemento  = (id) => document.getElementById(id);
+    const statusEl = elemento('status');
+    const logEl = elemento('log');
+    const connectBtn = elemento('connectBtn');
+    const disconnectBtn = elemento('disconnectBtn');
+    const sendBtn = elemento('sendBtn');
+
+    function setStatus(kind, text) {
+      statusEl.className = 'badge ' + kind;
+      statusEl.textContent = text;
+    }
+
+    function log(line, muted=false) {
+      const t = new Date().toLocaleTimeString();
+      logEl.textContent += `[${t}] ${line}\n`;
+      if (muted) logEl.lastChild?.classList?.add('muted');
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+
+    function normalizeWsUrl(raw) {
+      // Se o usuário já colocou ws:// ou wss://, mantemos.
+      try {
+        const u = new URL(raw);
+        if (u.protocol === 'ws:' || u.protocol === 'wss:') return u.href;
+      } catch (e) { /* cair para montagem manual */ }
+
+      // Se veio sem protocolo, escolhe com base no contexto da página
+      const scheme = (location.protocol === 'https:') ? 'wss' : 'ws';
+      return `${scheme}://${raw.replace(/^\/*/, '')}`;
+    }
+
+    function connect() {
+      const raw = elemento('wsUrl').value.trim();
+      if (!raw) { alert('Informe o endereço do WebSocket'); return; }
+
+      const url = normalizeWsUrl(raw);
+      try {
+        ws = new WebSocket(url);
+      } catch (e) {
+        setStatus('error', 'erro');
+        log('Falha ao criar WebSocket: ' + e.message);
+        return;
+      }
+
+      // UI
+      connectBtn.disabled = true;
+      disconnectBtn.disabled = false;
+      sendBtn.disabled = true;
+      setStatus('connecting', 'conectando…');
+      log('Conectando: ' + url);
+
+      ws.onopen = () => {
+        setStatus('connected', 'conectado');
+        sendBtn.disabled = false;
+        log('Conexão aberta');
+      };
+
+      ws.onmessage = async (evt) => {
+        // Pode vir texto, Blob ou ArrayBuffer
+        if (typeof evt.data === 'string') {
+          log('← ' + evt.data);
+        } else if (evt.data instanceof Blob) {
+          const text = await evt.data.text().catch(() => '[Blob recebido]');
+          log('← (blob) ' + text);
+        } else if (evt.data instanceof ArrayBuffer) {
+          log('← (binário) ' + new TextDecoder().decode(evt.data));
+        } else {
+          log('← (desconhecido)');
+        }
+      };
+
+      ws.onerror = (err) => {
+        setStatus('error', 'erro');
+        log('Erro de conexão (detalhes podem não estar disponíveis no navegador).');
+      };
+
+      ws.onclose = (evt) => {
+        setStatus('closed', 'desconectado');
+        connectBtn.disabled = false;
+        disconnectBtn.disabled = true;
+        sendBtn.disabled = true;
+        log(`Conexão fechada (code=${evt.code}${evt.reason ? ', reason=' + evt.reason : ''})`);
+      };
+    }
+
+    function disconnect() {
+      if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) {
+        log('Encerrando conexão…', true);
+        ws.close(1000, 'client closing');
+      }
+    }
+
+    function sendMessage() {
+      if (!ws || ws.readyState !== WebSocket.OPEN) {
+        return alert('Conexão não está aberta.');
+      }
+      const text = elemento('outMsg').value;
+      if (!text) return;
+      try {
+        ws.send(text);
+        log('→ ' + text);
+        // opcional: tente parsear JSON só para indicar no log
+        try { JSON.parse(text); log('(enviado como texto; servidor decide interpretar JSON)', true); } catch {}
+      } catch (e) {
+        log('Falha ao enviar: ' + e.message);
+      }
+    }
+
+    connectBtn.addEventListener('click', connect);
+    disconnectBtn.addEventListener('click', disconnect);
+    sendBtn.addEventListener('click', sendMessage);
+    elemento('outMsg').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+  </script>
+</body>
+</html>
