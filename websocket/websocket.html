@@ -8,7 +8,7 @@
     :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif; }
     body { margin: 24px; }
     .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-    input[type="text"] { min-width: 320px; padding: 8px 10px; }
+    .text { min-width: 320px; padding: 8px 10px; }
     button { padding: 8px 12px; cursor: pointer; }
     #status { font-weight: 600; }
     #log { margin-top: 12px; background:#0b1020; color:#d7e0ff; padding:12px; border-radius:8px; height: 45vh; overflow:auto; white-space: pre-wrap; }
@@ -18,21 +18,24 @@
     .closed     { background:#f8d7da; color:#842029; }
     .error      { background:#f8d7da; color:#842029; }
     .muted { color:#9aa4c9; }
+    .inputs {width: 70px; padding: 8px 5px;}
   </style>
 </head>
 <body>
   <h1>Envia WebSocket</h1>
 
   <div class="row">
-    <input id="wsUrl" type="text" placeholder="ex.: wss://meu-servidor.com/ws ou ws://IP:3000" />
+    <input value="wss://9qy4g2-3000.csb.app/" id="wsUrl" class="text" type="text" />
     <button id="connectBtn">Conectar</button>
     <button id="disconnectBtn" disabled>Desconectar</button>
     <span id="status" class="badge closed">desconectado</span>
   </div>
 
   <div class="row" style="margin-top:10px;">
-    <input id="outMsg" type="text" placeholder='mensagem para enviar (texto ou JSON)' />
-    <button id="sendBtn" disabled>Enviar</button>
+    <input id="id_servo" type="text" class="inputs" placeholder='id do servo' />
+    <input id="onLed" type="button" class="inputs" onclick="sendMessage(this)" value="on" />
+    <input id="offLed" type="button" class="inputs" onclick="sendMessage(this)" value="off" />
+    <!--<button id="sendBtn" disabled>Enviar</button>-->
   </div>
 
   <div id="log" aria-live="polite"></div>
@@ -45,7 +48,9 @@
     const logEl = elemento('log');
     const connectBtn = elemento('connectBtn');
     const disconnectBtn = elemento('disconnectBtn');
-    const sendBtn = elemento('sendBtn');
+    const offBtn = elemento('offLed');
+    const onBtn = elemento('onLed');
+
 
     function setStatus(kind, text) {
       statusEl.className = 'badge ' + kind;
@@ -87,13 +92,15 @@
       // UI
       connectBtn.disabled = true;
       disconnectBtn.disabled = false;
-      sendBtn.disabled = true;
+      onBtn.disabled = true;
+      offBtn.disabled = true;
       setStatus('connecting', 'conectando…');
       log('Conectando: ' + url);
 
       ws.onopen = () => {
         setStatus('connected', 'conectado');
-        sendBtn.disabled = false;
+        onBtn.disabled = false;
+        offBtn.disabled = false;
         log('Conexão aberta');
       };
 
@@ -120,7 +127,8 @@
         setStatus('closed', 'desconectado');
         connectBtn.disabled = false;
         disconnectBtn.disabled = true;
-        sendBtn.disabled = true;
+        onBtn.disabled = true;
+        offBtn.disabled = true;
         log(`Conexão fechada (code=${evt.code}${evt.reason ? ', reason=' + evt.reason : ''})`);
       };
     }
@@ -132,17 +140,19 @@
       }
     }
 
-    function sendMessage() {
+    function sendMessage(elmt) {
       if (!ws || ws.readyState !== WebSocket.OPEN) {
         return alert('Conexão não está aberta.');
       }
-      const text = elemento('outMsg').value;
-      if (!text) return;
+      const id_servo = elemento('id_servo').value;
+      if (!id_servo) return;
+
+      let comando = `{ "to": "${id_servo}", "cmd": "${elmt.value}" }`;
       try {
-        ws.send(text);
-        log('→ ' + text);
+        ws.send(comando);
+        log('→ ' + comando);
         // opcional: tente parsear JSON só para indicar no log
-        try { JSON.parse(text); log('(enviado como texto; servidor decide interpretar JSON)', true); } catch {}
+        //try { JSON.parse(text); log('(enviado como texto; servidor decide interpretar JSON)', true); } catch {}
       } catch (e) {
         log('Falha ao enviar: ' + e.message);
       }
@@ -150,10 +160,10 @@
 
     connectBtn.addEventListener('click', connect);
     disconnectBtn.addEventListener('click', disconnect);
-    sendBtn.addEventListener('click', sendMessage);
-    elemento('outMsg').addEventListener('keydown', (e) => {
+    //sendBtn.addEventListener('click', sendMessage);
+    /*elemento('outMsg').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') sendMessage();
-    });
+    });*/
   </script>
 </body>
 </html>
