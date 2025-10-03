@@ -97,7 +97,8 @@
       const btn = document.getElementById('loginBtn');
       btn.innerText = 'Logando...';
       btn.disabled = true;
-
+      await fetch("https://9tn2xd-3001.csb.app/health", { cache: "no-store" });
+      
       fetch('https://9tn2xd-3002.csb.app/api/usuarios/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
