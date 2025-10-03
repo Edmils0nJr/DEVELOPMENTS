@@ -101,7 +101,7 @@
       
       fetch('https://9tn2xd-3002.csb.app/api/usuarios/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
         credentials: "include",
         body: new URLSearchParams(payload).toString()
       })
