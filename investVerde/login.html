@@ -101,6 +101,7 @@
       fetch('https://9tn2xd-3001.csb.app/api/usuarios/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: "include",
         body: JSON.stringify(payload)
       })
       .then(res => res.json().then(data => ({ status: res.status, body: data })))
