@@ -109,6 +109,7 @@
 
     // Normaliza ODS vindas da API em array de strings ["1","7","13"]
     function getOdsDoProjeto(p) {
+      console.log(p);
       if (Array.isArray(p.ods)) return p.ods.map(String);
       if (Array.isArray(p.ods_codes)) return p.ods_codes.map(String);
       if (typeof p.ods_codes === "string") return p.ods_codes.split(",").map(s => s.trim());
@@ -123,7 +124,7 @@
         const res = await fetch("https://9tn2xd-3001.csb.app/api/projetos/");
         const lista = await res.json();
         if (!res.ok) throw new Error("Falha ao obter projetos");
-
+        console.log(lista);
         const texto = filtroTexto.trim().toLowerCase();
 
         const filtrado = lista.filter(p => {
