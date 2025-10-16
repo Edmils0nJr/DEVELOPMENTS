@@ -1,50 +1,144 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Catálogo de Projetos</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="css/estilo.css" rel="stylesheet"/>
+  <meta http-equiv="Content-Language" content="pt-br" />
+  <title>Catálogo de Projetos — Visitantes</title>
+
+  <!-- Bootstrap CSS + Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
   <style>
-    body { background-color: #ecf0f1; }
-    
+    body{ background:#f7f7fb; }
+    a{ text-decoration:none; }
+    .navbar-brand{ font-weight:700; letter-spacing:.3px; }
+    .btn-custom{
+      background:#198754; color:#fff; border:none;
+      border-radius:.75rem; padding:.5rem 1rem;
+    }
+    .btn-custom:hover{ filter:brightness(0.95); }
+    .card-projeto{ border-radius:1rem; overflow:hidden; }
+    .card-projeto .card-img-top{ height:180px; object-fit:cover; }
+    .input-group .form-control{ border-top-left-radius:.75rem; border-bottom-left-radius:.75rem; }
+    .input-group .btn{ border-top-right-radius:.75rem; border-bottom-right-radius:.75rem; }
+    .badge{ border-radius:50rem; }
   </style>
 </head>
+
 <body>
-  <div class="container py-4 col-lg-8 col-md-10 col-sm-12 box">
-    <div class="text-center">
-      <img src="https://raw.githubusercontent.com/Edmils0nJr/DEVELOPMENTS/main/css/logo.png" class="img-fluid mb-3" style="max-width: 220px;" alt="Logo" />
-      <h2 class="fw-bold">Projetos Sustentáveis</h2>
+  <!-- Navbar simples -->
+  <nav class="navbar navbar-light bg-white shadow-sm">
+    <div class="container">
+      <span class="navbar-brand mb-0 h1">Catálogo de Projetos</span>
+      <span class="text-muted small">Visitantes</span>
+    </div>
+  </nav>
+
+  <main class="container my-4">
+    <!-- Busca + Botões -->
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10">
+        <div class="input-group">
+          <input id="busca" type="search" class="form-control" placeholder="Buscar por nome ou descrição..." aria-label="Buscar" />
+          <button id="btnBuscar" class="btn btn-outline-secondary" type="button" title="Buscar">
+            <i class="bi bi-search"></i>
+          </button>
+          <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#filtrosOds" aria-expanded="false" aria-controls="filtrosOds" title="Abrir filtros">
+            <i class="bi bi-funnel"></i> Filtros
+          </button>
+        </div>
+
+        <!-- Área colapsável de filtros -->
+        <div id="filtrosOds" class="collapse mt-2">
+          <div class="card card-body">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <strong>Filtrar por ODS</strong>
+              <div class="d-flex gap-2">
+                <button id="selecionarTodas" class="btn btn-sm btn-outline-secondary">Selecionar todas</button>
+                <button id="limparOds" class="btn btn-sm btn-outline-secondary">Limpar</button>
+              </div>
+            </div>
+
+            <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-2">
+              <!-- 1..17 -->
+              <div class="form-check col"><input class="form-check-input ods" type="checkbox" value="1" id="ods1"><label class="form-check-label" for="ods1">ODS 1</label></div>
+              <div class="form-check col"><input class="form-check-input ods" type="checkbox" value="2" id="ods2"><label class="form-check-label" for="ods2">ODS 2</label></div>
+              <div class="form-check col"><input class="form-check-input ods" type="checkbox" value="3" id="ods3"><label class="form-check-label" for="ods3">ODS 3</label></div>
+              <div class="form-check col"><input class="form-check-input ods" type="checkbox" value="4" id="ods4"><label class="form-check-label" for="ods4">ODS 4</label></div>
+              <div class="form-check col"><input class="form-check-input ods" type="checkbox" value="5" id="ods5"><label class="form-check-label" for="ods5">ODS 5</label></div>
+              <div class="form-check col"><input class="form-check-input ods" type="checkbox" value="6" id="ods6"><label class="form-check-label" for="ods6">ODS 6</label></div>
+              <div class="form-check col"><input class="form-check-input ods" type="checkbox" value="7" id="ods7"><label class="form-check-label" for="ods7">ODS 7</label></div>
+              <div class="form-check col"><input class="form-check-input ods" type="checkbox" value="8" id="ods8"><label class="form-check-label" for="ods8">ODS 8</label></div>
+              <div class="form-check col"><input class="form-check-input ods" type="checkbox" value="9" id="ods9"><label class="form-check-label" for="ods9">ODS 9</label></div>
+              <div class="form-check col"><input class="form-check-input ods" type="checkbox" value="10" id="ods10"><label class="form-check-label" for="ods10">ODS 10</label></div>
+              <div class="form-check col"><input class="form-check-input ods" type="checkbox" value="11" id="ods11"><label class="form-check-label" for="ods11">ODS 11</label></div>
+              <div class="form-check col"><input class="form-check-input ods" type="checkbox" value="12" id="ods12"><label class="form-check-label" for="ods12">ODS 12</label></div>
+              <div class="form-check col"><input class="form-check-input ods" type="checkbox" value="13" id="ods13"><label class="form-check-label" for="ods13">ODS 13</label></div>
+              <div class="form-check col"><input class="form-check-input ods" type="checkbox" value="14" id="ods14"><label class="form-check-label" for="ods14">ODS 14</label></div>
+              <div class="form-check col"><input class="form-check-input ods" type="checkbox" value="15" id="ods15"><label class="form-check-label" for="ods15">ODS 15</label></div>
+              <div class="form-check col"><input class="form-check-input ods" type="checkbox" value="16" id="ods16"><label class="form-check-label" for="ods16">ODS 16</label></div>
+              <div class="form-check col"><input class="form-check-input ods" type="checkbox" value="17" id="ods17"><label class="form-check-label" for="ods17">ODS 17</label></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="input-group mb-4">
-      <input type="text" id="busca" class="form-control" placeholder="Buscar Projetos..." />
-      <button class="btn btn-outline-secondary" type="button" id="btnBuscar">
-        <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Buscar" style="width: 20px;" />
-      </button>
+    <!-- Lista de cartões -->
+    <div class="row mt-4 g-3" id="listaProjetos">
+      <!-- Cards rendem aqui -->
     </div>
+  </main>
 
-    <div id="listaProjetos" class="row"></div>
+  <!-- Bootstrap JS (bundle com Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  </div>
-
+  <!-- Lógica de busca + filtros -->
   <script>
     const container = document.getElementById("listaProjetos");
     const campoBusca = document.getElementById("busca");
     const btnBuscar = document.getElementById("btnBuscar");
+    const btnLimpar = document.getElementById("limparOds");
+    const btnSelecionarTodas = document.getElementById("selecionarTodas");
 
-    async function carregarProjetos(filtro = "") {
-      container.innerHTML = "<p>Carregando...</p>";
+    const checkOds = () =>
+      Array.from(document.querySelectorAll(".form-check-input.ods:checked"))
+        .map(c => c.value);
+
+    // Normaliza ODS vindas da API em array de strings ["1","7","13"]
+    function getOdsDoProjeto(p) {
+      if (Array.isArray(p.ods)) return p.ods.map(String);
+      if (Array.isArray(p.ods_codes)) return p.ods_codes.map(String);
+      if (typeof p.ods_codes === "string") return p.ods_codes.split(",").map(s => s.trim());
+      if (typeof p.ods === "string") return p.ods.split(",").map(s => s.trim());
+      return [];
+    }
+
+    async function carregarProjetos(filtroTexto = "", odsSelecionadas = []) {
+      container.innerHTML = "<p class='text-center text-muted'>Carregando...</p>";
       try {
+        
         const res = await fetch("https://9tn2xd-3001.csb.app/api/projetos/");
         const lista = await res.json();
-        if (!res.ok) throw new Error();
+        if (!res.ok) throw new Error("Falha ao obter projetos");
 
-        const filtrado = lista.filter(p => 
-          p.nome_projeto.toLowerCase().includes(filtro.toLowerCase()) ||
-          p.resumo_descricao.toLowerCase().includes(filtro.toLowerCase())
-        );
+        const texto = filtroTexto.trim().toLowerCase();
+
+        const filtrado = lista.filter(p => {
+          const bateTexto =
+            !texto ||
+            (p.nome_projeto && p.nome_projeto.toLowerCase().includes(texto)) ||
+            (p.resumo_descricao && p.resumo_descricao.toLowerCase().includes(texto));
+
+          if (!bateTexto) return false;
+
+          const odsProjeto = getOdsDoProjeto(p); // ["1","7",...]
+          if (!odsSelecionadas.length) return true;
+
+          return odsProjeto.some(code => odsSelecionadas.includes(String(code)));
+        });
 
         if (filtrado.length === 0) {
           container.innerHTML = "<p class='text-center'>Nenhum projeto encontrado.</p>";
@@ -55,35 +149,57 @@
         filtrado.forEach(p => {
           const card = document.createElement("div");
           card.className = "col-md-6 col-lg-4";
+          const odsTags = getOdsDoProjeto(p)
+            .map(o => `<span class="badge text-bg-success me-1 mb-1">ODS ${o}</span>`)
+            .join("");
+
           card.innerHTML = `
-            <div class="card card-projeto shadow-sm">
-              <img src="${p.img_projeto}" class="card-img-top" alt="Projeto" />
-              <div class="card-body text-center">
-                <h5 class="card-title">${p.nome_projeto}</h5>
-                <p class="card-text">${p.resumo_descricao}</p>
-                <p class="text-success fw-bold">R$ ${p.valor}</p>
-                <a href="detalhesProjeto_visitantes.html?id=${p.id}" class="btn btn-custom">Ver mais</a>
+            <div class="card card-projeto shadow-sm h-100">
+              <img src="${p.img_projeto || ""}" class="card-img-top" alt="Imagem do projeto"
+                   onerror="this.style.display='none'"/>
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title text-center">${p.nome_projeto ?? "Projeto"}</h5>
+                <p class="card-text">${p.resumo_descricao ?? ""}</p>
+                <div class="mb-2">${odsTags}</div>
+                <p class="text-success fw-bold mb-3">${p.valor ? ("R$ " + p.valor) : ""}</p>
+                <a href="detalhesProjeto_visitantes.html?id=${p.id}" class="btn btn-custom mt-auto">Ver mais</a>
               </div>
             </div>
           `;
           container.appendChild(card);
         });
       } catch (err) {
-        container.innerHTML = "<p class='text-danger'>Erro ao carregar projetos.</p>";
         console.error(err);
+        container.innerHTML = "<p class='text-danger text-center'>Erro ao carregar projetos.</p>";
       }
     }
 
+    // Eventos
     btnBuscar.addEventListener("click", () => {
-      carregarProjetos(campoBusca.value);
+      carregarProjetos(campoBusca.value, checkOds());
     });
 
     campoBusca.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
-        carregarProjetos(campoBusca.value);
-      }
+      if (e.key === "Enter") carregarProjetos(campoBusca.value, checkOds());
     });
 
+    document.querySelectorAll(".form-check-input.ods").forEach(cb => {
+      cb.addEventListener("change", () => {
+        carregarProjetos(campoBusca.value, checkOds());
+      });
+    });
+
+    btnLimpar.addEventListener("click", () => {
+      document.querySelectorAll(".form-check-input.ods").forEach(cb => cb.checked = false);
+      carregarProjetos(campoBusca.value, []);
+    });
+
+    btnSelecionarTodas.addEventListener("click", () => {
+      document.querySelectorAll(".form-check-input.ods").forEach(cb => cb.checked = true);
+      carregarProjetos(campoBusca.value, checkOds());
+    });
+
+    // Primeira carga
     carregarProjetos();
   </script>
 </body>
