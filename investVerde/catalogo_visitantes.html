@@ -109,12 +109,9 @@
 
     // Normaliza ODS vindas da API em array de strings ["1","7","13"]
     function getOdsDoProjeto(p) {
-      console.log(p);
-      if (Array.isArray(p.ods)) return p.ods.map(String);
-      if (Array.isArray(p.ods)) return p.ods.map(String);
-      if (typeof p.ods === "string") return p.ods.split(",").map(s => s.trim());
-      if (typeof p.ods === "string") return p.ods.split(",").map(s => s.trim());
-      return [];
+      let array = p.ods.map((i) => i.replace(/\D/g, ''));
+      console.log(array);
+      return array;
     }
 
     async function carregarProjetos(filtroTexto = "", odsSelecionadas = []) {
@@ -124,7 +121,7 @@
         const res = await fetch("https://9tn2xd-3001.csb.app/api/projetos/");
         const lista = await res.json();
         if (!res.ok) throw new Error("Falha ao obter projetos");
-        console.log(lista);
+
         const texto = filtroTexto.trim().toLowerCase();
 
         const filtrado = lista.filter(p => {
@@ -151,7 +148,7 @@
           const card = document.createElement("div");
           card.className = "col-md-6 col-lg-4";
           const odsTags = getOdsDoProjeto(p)
-            .map(o => `<span class="badge text-bg-success me-1 mb-1">ODS ${o}</span>`)
+            .map(o => `<span class="badge text-bg-success me-1 mb-1"> ${o}</span>`)
             .join("");
 
           card.innerHTML = `
