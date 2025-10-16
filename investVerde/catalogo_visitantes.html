@@ -148,7 +148,7 @@
           const card = document.createElement("div");
           card.className = "col-md-6 col-lg-4";
           const odsTags = getOdsDoProjeto(p)
-            .map(o => `<span class="badge text-bg-success me-1 mb-1"> ${o}</span>`)
+            .map(o => `<span class="badge text-bg-success me-1 mb-1">ODS ${o}</span>`)
             .join("");
 
           card.innerHTML = `
