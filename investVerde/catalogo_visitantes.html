@@ -111,8 +111,8 @@
     function getOdsDoProjeto(p) {
       console.log(p);
       if (Array.isArray(p.ods)) return p.ods.map(String);
-      if (Array.isArray(p.ods_codes)) return p.ods_codes.map(String);
-      if (typeof p.ods_codes === "string") return p.ods_codes.split(",").map(s => s.trim());
+      if (Array.isArray(p.ods)) return p.ods.map(String);
+      if (typeof p.ods === "string") return p.ods.split(",").map(s => s.trim());
       if (typeof p.ods === "string") return p.ods.split(",").map(s => s.trim());
       return [];
     }
