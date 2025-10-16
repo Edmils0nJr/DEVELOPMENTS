@@ -109,9 +109,7 @@
 
     // Normaliza ODS vindas da API em array de strings ["1","7","13"]
     function getOdsDoProjeto(p) {
-      let array = p.ods.map((i) => i.replace(/\D/g, ''));
-      console.log(array);
-      return array;
+      return p.ods.map((i) => i.replace(/\D/g, ''));
     }
 
     async function carregarProjetos(filtroTexto = "", odsSelecionadas = []) {
