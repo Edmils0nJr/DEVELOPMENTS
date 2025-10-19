@@ -137,7 +137,7 @@
         const listaI = await res.json();
         if (!res.ok) throw new Error();
         render(listaI);
-        //console.log(listaI)
+        console.log(listaI)
       } catch (err) {
         lista.innerHTML = "<p class='text-danger'>Erro ao carregar investidores.</p>";
         console.error(err);
