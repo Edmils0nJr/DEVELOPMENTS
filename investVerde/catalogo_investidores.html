@@ -131,6 +131,19 @@
     const btnAplicar = document.getElementById("btnAplicar");
     const btnLimpar = document.getElementById("btnLimpar");
 
+    async function carregarInvestidores() {
+      try {
+        const res = await fetch("https://9tn2xd-3001.csb.app/api/investidores/");
+        const listaI = await res.json();
+        if (!res.ok) throw new Error();
+
+        console.log(lista)
+      } catch (err) {
+        lista.innerHTML = "<p class='text-danger'>Erro ao carregar investidores.</p>";
+        console.error(err);
+      }
+    }
+
     function render(items) {{ 
       lista.innerHTML = "";
       if (items.length === 0) {{ 
