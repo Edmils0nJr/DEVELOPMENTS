@@ -136,8 +136,8 @@
         const res = await fetch("https://9tn2xd-3001.csb.app/api/investidores/");
         const listaI = await res.json();
         if (!res.ok) throw new Error();
-
-        console.log(listaI)
+        render(listaI);
+        //console.log(listaI)
       } catch (err) {
         lista.innerHTML = "<p class='text-danger'>Erro ao carregar investidores.</p>";
         console.error(err);
@@ -200,7 +200,7 @@
     btnLimpar.addEventListener("click", () => {{ filtroOds.selectedIndex = -1; filtroArea.value=""; atualizar(); }});
 
 
-    render(dados);
+    //render(dados);
   </script>
 </body>
 </html>
