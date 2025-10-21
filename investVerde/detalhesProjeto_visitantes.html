@@ -235,7 +235,6 @@
         document.getElementById("conteudo").innerHTML = "<p class='text-danger'>Erro ao carregar detalhes do projeto.</p>";
       }
     }`
-                            : `https://api.dicebear.com/8.x/initials/svg?seed=${encodeURIComponent(projeto.nome || 'Usuario')}`);
 
         const verificado = Boolean(projeto.verificado);
         const nivel = projeto.nivel_seguranca ?? projeto.nivel_segurança; // aceita dois formatos
