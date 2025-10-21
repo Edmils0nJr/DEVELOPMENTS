@@ -234,7 +234,7 @@
         console.error(err);
         document.getElementById("conteudo").innerHTML = "<p class='text-danger'>Erro ao carregar detalhes do projeto.</p>";
       }
-    }`
+    }
 
         const verificado = Boolean(projeto.verificado);
         const nivel = projeto.nivel_seguranca ?? projeto.nivel_segurança; // aceita dois formatos
@@ -248,7 +248,7 @@
         else if (nivelPct > 0) progressClass = 'bg-danger';
 
         document.getElementById("conteudo").innerHTML = `
-          <div class="text-center mb-4">
+        <div class="text-center mb-4">
             <h5 class="text-success">${projeto.nome_projeto ?? 'Projeto'}</h5>
             <p class="text-muted">${projeto.categoria ?? ''}</p>
           </div>
