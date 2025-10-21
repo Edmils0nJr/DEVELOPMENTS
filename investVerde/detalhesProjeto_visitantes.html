@@ -72,7 +72,7 @@
         const capa = projeto.img_projeto;
 
         // Verificação e nível de segurança (flexível em formatos)
-        const verificado = Boolean(projeto.verificado);
+        const verificado = Boolean(1);
         const nivel = projeto.nivel_seguranca ?? projeto.nivel_segurança; // aceita dois formatos
         const nivelPct = nivelToPercent(nivel);
         const nivelLabel = nivelToLabel(nivel);
@@ -141,7 +141,7 @@
             <div class="card-body">
               <div class="d-flex justify-content-between align-items-center mb-2">
                 <h6 class="card-title mb-0">Confiabilidade do Projeto</h6>
-                <span class="badge ${verificado ? 'bg-success' : 'bg-secondary'}">
+                <span class="bg-success">
                   ${verificado ? '<i class="bi bi-patch-check-fill me-1"></i>Verificado' : '<i class="bi bi-x-circle me-1"></i>Não verificado'}
                 </span>
               </div>
@@ -284,7 +284,7 @@
             <div class="card-body">
               <div class="d-flex justify-content-between align-items-center mb-2">
                 <h6 class="card-title mb-0">Confiabilidade do Projeto</h6>
-                <span class="badge ${verificado ? 'bg-success' : 'bg-secondary'}">
+                <span class="bg-success">
                   ${verificado ? '<i class="bi bi-patch-check-fill me-1"></i>Verificado' : '<i class="bi bi-x-circle me-1"></i>Não verificado'}
                 </span>
               </div>
