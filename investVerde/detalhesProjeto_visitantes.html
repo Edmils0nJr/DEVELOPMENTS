@@ -66,12 +66,10 @@
         const projeto = await res.json();
 
         // Avatar do responsável
-        const avatar = projeto.foto_url
-          || (projeto.email ? `https://api.dicebear.com/8.x/initials/svg?seed=${encodeURIComponent(projeto.nome || projeto.email)}`
-                            : `https://api.dicebear.com/8.x/initials/svg?seed=${encodeURIComponent(projeto.nome || 'Usuario')}`);
+        const avatar = projeto.imagem
 
         // Capa do projeto (imagem principal)
-        const capa = projeto.capa_url || projeto.imagem_capa || projeto.capa || projeto.imagem || null;
+        const capa = projeto.img_projeto;
 
         // Verificação e nível de segurança (flexível em formatos)
         const verificado = Boolean(projeto.verificado);
