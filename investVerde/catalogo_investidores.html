@@ -106,20 +106,6 @@
   </div>
 
   <script>
-    const dados = [
-      { id: 1, nome: "Prefeitura Municipal de VerdeVivo", img: "https://images.unsplash.com/photo-1486304873000-235643847519?q=80&w=800&auto=format&fit=crop", 
-        desc: "Buscar e apoiar projetos inovadores que promovam soluções sustentáveis para os desafios urbanos, como gestão de resíduos, mobilidade e educação ambiental, aproximando o poder público da sociedade civil e acadêmica.",
-        ods: [11,12,13], areas:["Tratamento de resíduos","Gestão de água"] },
-      { id: 2, nome: "Banco Terra Fértil S.A.", img: "imagens/terra_fertil.jfif", 
-        desc: "Investir em ideias sustentáveis e tecnologias verdes que promovam o desenvolvimento econômico aliado à preservação ambiental, incentivando o empreendedorismo com impacto positivo.",
-        ods: [8,9,13], areas:["Energia renovável","Indústria verde"] },
-      { id: 3, nome: "ONG Nova Semente", img: "imagens/ong.png",
-        desc: "Apoiar causas socioambientais por meio da identificação e parceria com projetos que envolvam comunidades locais em ações de reflorestamento, reciclagem, educação e inclusão social.",
-        ods: [10,12,15], areas:["Conservação de biodiversidade","Tratamento de resíduos"] },
-      { id: 4, nome: "Agência Nacional de Inovação Sustentável (ANIS)", img: "imagens/ans.jfif",
-        desc: "Fomentar políticas públicas baseadas em soluções tecnológicas sustentáveis, estimulando a colaboração entre governos, universidades, empresas e sociedade civil para acelerar a transição ecológica do país.",
-        ods: [4,7,17], areas:["Energia renovável","Educação"] }
-    ];
 
     const lista = document.getElementById("listaInvestidores");
     const campoBusca = document.getElementById("busca");
@@ -199,8 +185,6 @@
     btnAplicar.addEventListener("click", atualizar);
     btnLimpar.addEventListener("click", () => {{ filtroOds.selectedIndex = -1; filtroArea.value=""; atualizar(); }});
 
-
-    //render(dados);
   </script>
 </body>
 </html>
