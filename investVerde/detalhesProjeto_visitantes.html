@@ -4,22 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Detalhes do Projeto</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
   <link href="css/estilo.css" rel="stylesheet"/>
-  <!-- Ícones Bootstrap -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <style>
-    .avatar {
-      width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid #e9ecef;
-    }
-    .placeholder-box {
-      background: repeating-linear-gradient(45deg,#f1f3f5,#f1f3f5 10px,#e9ecef 10px,#e9ecef 20px);
-      border: 1px dashed #cfd4da; border-radius: .75rem;
-    }
-  </style>
 </head>
 <body class="bg-light">
-  <div class="container py-4 col-lg-8 col-md-10 col-sm-12 box">
+  <div class="container py-4  col-lg-8 col-md-10 col-sm-12 box" >
     <div class="text-center mb-4">
       <img src="https://raw.githubusercontent.com/Edmils0nJr/DEVELOPMENTS/main/css/logo.png" alt="Logo" style="height: 50px;" />
     </div>
@@ -32,31 +24,6 @@
   </div>
 
   <script>
-    function nivelToPercent(n) {
-      if (n == null) return 0;
-      if (typeof n === 'number') {
-        // se vier 1..5
-        if (n >= 1 && n <= 5) return Math.round((n/5)*100);
-        // se vier 0..100
-        return Math.max(0, Math.min(100, n));
-      }
-      const txt = String(n).toLowerCase();
-      if (['alto','alta','high'].includes(txt)) return 90;
-      if (['medio','médio','medium'].includes(txt)) return 60;
-      if (['baixo','baixa','low'].includes(txt)) return 30;
-      return 0;
-    }
-
-    function nivelToLabel(n) {
-      if (n == null) return 'Não informado';
-      if (typeof n === 'number') {
-        if (n >= 1 && n <= 5) return `Nível ${n}/5`;
-        return `${n}%`;
-      }
-      const txt = String(n).trim();
-      return txt ? txt : 'Não informado';
-    }
-
     async function carregarDetalhes() {
       const params = new URLSearchParams(window.location.search);
       const id = params.get("id") || 5;
@@ -65,164 +32,39 @@
         const res = await fetch("https://9tn2xd-3001.csb.app/api/projetos/" + id);
         const projeto = await res.json();
 
-        // Avatar do responsável
-        const avatar = projeto.imagem
-
-        // Capa do projeto (imagem principal)
-        const capa = projeto.img_projeto;
-
-        // Verificação e nível de segurança (flexível em formatos)
-        const verificado = Boolean(1);
-        const nivel = projeto.nivel_seguranca ?? projeto.nivel_segurança; // aceita dois formatos
-        const nivelPct = nivelToPercent(nivel);
-        const nivelLabel = nivelToLabel(nivel);
-
-        let progressClass = 'bg-secondary';
-        if (nivelPct >= 75) progressClass = 'bg-success';
-        else if (nivelPct >= 40) progressClass = 'bg-warning';
-        else if (nivelPct > 0) progressClass = 'bg-danger';
-
-        // URLs de arquivos (aceita nomes alternativos)
-        const urlPpt = projeto.apresentacao_pptx_url || projeto.pptx_url || projeto.apresentacao_url || projeto.slides_url || null;
-        const urlXlsx = projeto.orcamento_planilha_url || projeto.orcamento_url || projeto.xlsx_url || projeto.planilha_url || null;
-        const urlPdf = projeto.descricao_pdf_url || projeto.pdf_url || projeto.documento_url || null;
-
         document.getElementById("conteudo").innerHTML = `
           <div class="text-center mb-4">
-            <h5 class="text-success">${projeto.nome_projeto ?? 'Projeto'}</h5>
-            <p class="text-muted">${projeto.categoria ?? ''}</p>
-          </div>
-
-          <!-- Capa do Projeto -->
-          <div class="card mb-3" id="capa-card">
-            <div class="card-body">
-              <h6 class="card-title">Capa do Projeto</h6>
-              ${capa
-                ? `<img src="${capa}" class="img-fluid rounded" alt="Capa do projeto">`
-                : `<div class="placeholder-box ratio ratio-16x9 d-flex align-items-center justify-content-center text-muted">
-                     <div class="text-center">
-                       <i class="bi bi-image fs-1 d-block mb-2"></i>
-                       <div><strong>Capa do projeto</strong></div>
-                       <div class="small">(em breve)</div>
-                     </div>
-                   </div>`}
-            </div>
+            <h5 class="text-success">${projeto.nome_projeto}</h5>
+            <p class="text-muted">${projeto.categoria}</p>
           </div>
 
           <div class="card mb-3">
             <div class="card-body">
               <h6 class="card-title">Sobre o Projeto</h6>
-              <p class="card-text">${projeto.resumo_descricao ?? ''}</p>
+              <p class="card-text">${projeto.resumo_descricao}</p>
             </div>
           </div>
 
           <div class="card mb-3">
             <div class="card-body">
               <h6 class="card-title">Financiamento</h6>
-              <p class="card-text">Valor do Projeto: <strong>${projeto.valor ?? '—'}</strong></p>
+              <p class="card-text">Valor do Projeto: <strong>${projeto.valor}</strong></p>
               <p class="card-text text-muted">Meta: R$250.000</p>
             </div>
           </div>
 
-          <!-- Responsável pelo projeto -->
-          <div class="card mb-3">
-            <div class="card-body d-flex align-items-center gap-3">
-              <img class="avatar" src="${avatar}" alt="Avatar do responsável">
-              <div>
-                <h6 class="card-title mb-1">Responsável</h6>
-                <p class="card-text mb-1"><strong>${projeto.nome ?? '—'}</strong></p>
-                <p class="card-text text-muted mb-0">${projeto.email ?? ''}${projeto.telefone ? '<br>'+projeto.telefone : ''}</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Confiabilidade / Verificação -->
           <div class="card mb-3">
             <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <h6 class="card-title mb-0">Confiabilidade do Projeto</h6>
-                <span class="bg-success">
-                  ${verificado ? '<i class="bi bi-patch-check-fill me-1"></i>Verificado' : '<i class="bi bi-x-circle me-1"></i>Não verificado'}
-                </span>
-              </div>
-              <div class="small text-muted mb-2">Nível de segurança: <strong>${nivelLabel}</strong></div>
-              <div class="progress" role="progressbar" aria-label="Nível de segurança" aria-valuenow="${nivelPct}" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar ${progressClass}" style="width: ${nivelPct}%"></div>
-              </div>
-              <p class="mt-2 mb-0 text-muted small">A verificação confirma que os dados do responsável e documentos básicos foram revisados. O nível de segurança indica o grau de robustez documental/operacional informado pelo proponente.</p>
-            </div>
-          </div>
-
-          <!-- Arquivos do Projeto -->
-          <div class="card mb-3">
-            <div class="card-body">
-              <h6 class="card-title">Arquivos do Projeto</h6>
-              <p class="text-muted small mb-3">Estes arquivos aparecerão aqui quando forem enviados.</p>
-              <div class="row g-3">
-                <!-- PPTX -->
-                <div class="col-md-4">
-                  <div class="border rounded p-3 h-100 d-flex flex-column">
-                    <div class="d-flex align-items-center gap-2 mb-2">
-                      <i class="bi bi-filetype-pptx fs-3"></i>
-                      <div>
-                        <strong>Apresentação</strong>
-                        <div class="text-muted small">PowerPoint (.pptx)</div>
-                      </div>
-                    </div>
-                    ${urlPpt
-                      ? `<a href="${urlPpt}" class="btn btn-outline-success mt-auto" target="_blank" rel="noopener">Abrir</a>`
-                      : `<div class="mt-auto">
-                           <span class="badge bg-secondary">Em breve</span>
-                           <div class="text-muted small mt-1">Ex.: apresentacao-projeto.pptx</div>
-                         </div>`}
-                  </div>
-                </div>
-
-                <!-- XLSX -->
-                <div class="col-md-4">
-                  <div class="border rounded p-3 h-100 d-flex flex-column">
-                    <div class="d-flex align-items-center gap-2 mb-2">
-                      <i class="bi bi-filetype-xlsx fs-3"></i>
-                      <div>
-                        <strong>Orçamento</strong>
-                        <div class="text-muted small">Planilha (.xlsx)</div>
-                      </div>
-                    </div>
-                    ${urlXlsx
-                      ? `<a href="${urlXlsx}" class="btn btn-outline-success mt-auto" target="_blank" rel="noopener">Abrir</a>`
-                      : `<div class="mt-auto">
-                           <span class="badge bg-secondary">Em breve</span>
-                           <div class="text-muted small mt-1">Ex.: orcamento.xlsx</div>
-                         </div>`}
-                  </div>
-                </div>
-
-                <!-- PDF -->
-                <div class="col-md-4">
-                  <div class="border rounded p-3 h-100 d-flex flex-column">
-                    <div class="d-flex align-items-center gap-2 mb-2">
-                      <i class="bi bi-file-earmark-pdf fs-3"></i>
-                      <div>
-                        <strong>Descrição</strong>
-                        <div class="text-muted small">PDF (.pdf)</div>
-                      </div>
-                    </div>
-                    ${urlPdf
-                      ? `<a href="${urlPdf}" class="btn btn-outline-success mt-auto" target="_blank" rel="noopener">Abrir</a>`
-                      : `<div class="mt-auto">
-                           <span class="badge bg-secondary">Em breve</span>
-                           <div class="text-muted small mt-1">Ex.: descricao.pdf</div>
-                         </div>`}
-                  </div>
-                </div>
-              </div>
+              <h6 class="card-title">Responsável</h6>
+              <p class="card-text mb-1"><strong>${projeto.nome}</strong></p>
+              <p class="card-text text-muted">${projeto.email}<br>${projeto.telefone}</p>
             </div>
           </div>
 
           <div class="card mb-3">
             <div class="card-body">
               <h6 class="card-title">Documentação e Relatórios</h6>
-              <ul class="mb-0">
+              <ul>
                 <li>Plano de Execução</li>
                 <li>Orçamento Planejado</li>
                 <li>Fotos da Área</li>
@@ -231,84 +73,6 @@
           </div>
         `;
       } catch (err) {
-        console.error(err);
-        document.getElementById("conteudo").innerHTML = "<p class='text-danger'>Erro ao carregar detalhes do projeto.</p>";
-      }
-    }
-
-        const verificado = Boolean(projeto.verificado);
-        const nivel = projeto.nivel_seguranca ?? projeto.nivel_segurança; // aceita dois formatos
-        const nivelPct = nivelToPercent(nivel);
-        const nivelLabel = nivelToLabel(nivel);
-
-        // classes de cor para a barra
-        let progressClass = 'bg-secondary';
-        if (nivelPct >= 75) progressClass = 'bg-success';
-        else if (nivelPct >= 40) progressClass = 'bg-warning';
-        else if (nivelPct > 0) progressClass = 'bg-danger';
-
-        document.getElementById("conteudo").innerHTML = `
-        <div class="text-center mb-4">
-            <h5 class="text-success">${projeto.nome_projeto ?? 'Projeto'}</h5>
-            <p class="text-muted">${projeto.categoria ?? ''}</p>
-          </div>
-
-          <div class="card mb-3">
-            <div class="card-body">
-              <h6 class="card-title">Sobre o Projeto</h6>
-              <p class="card-text">${projeto.resumo_descricao ?? ''}</p>
-            </div>
-          </div>
-
-          <div class="card mb-3">
-            <div class="card-body">
-              <h6 class="card-title">Financiamento</h6>
-              <p class="card-text">Valor do Projeto: <strong>${projeto.valor ?? '—'}</strong></p>
-              <p class="card-text text-muted">Meta: R$250.000</p>
-            </div>
-          </div>
-
-          <div class="card mb-3">
-            <div class="card-body d-flex align-items-center gap-3">
-              <img class="avatar" src="${avatar}" alt="Avatar do responsável">
-              <div>
-                <h6 class="card-title mb-1">Responsável</h6>
-                <p class="card-text mb-1"><strong>${projeto.nome ?? '—'}</strong></p>
-                <p class="card-text text-muted mb-0">${projeto.email ?? ''}${projeto.telefone ? '<br>'+projeto.telefone : ''}</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Confiabilidade / Verificação -->
-          <div class="card mb-3">
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <h6 class="card-title mb-0">Confiabilidade do Projeto</h6>
-                <span class="bg-success">
-                  ${verificado ? '<i class="bi bi-patch-check-fill me-1"></i>Verificado' : '<i class="bi bi-x-circle me-1"></i>Não verificado'}
-                </span>
-              </div>
-              <div class="small text-muted mb-2">Nível de segurança: <strong>${nivelLabel}</strong></div>
-              <div class="progress" role="progressbar" aria-label="Nível de segurança" aria-valuenow="${nivelPct}" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar ${progressClass}" style="width: ${nivelPct}%"></div>
-              </div>
-              <p class="mt-2 mb-0 text-muted small">A verificação confirma que os dados do responsável e documentos básicos foram revisados. O nível de segurança indica o grau de robustez documental/operacional informado pelo proponente.</p>
-            </div>
-          </div>
-
-          <div class="card mb-3">
-            <div class="card-body">
-              <h6 class="card-title">Documentação e Relatórios</h6>
-              <ul class="mb-0">
-                <li>Plano de Execução</li>
-                <li>Orçamento Planejado</li>
-                <li>Fotos da Área</li>
-              </ul>
-            </div>
-          </div>
-        `;
-      } catch (err) {
-        console.error(err);
         document.getElementById("conteudo").innerHTML = "<p class='text-danger'>Erro ao carregar detalhes do projeto.</p>";
       }
     }
