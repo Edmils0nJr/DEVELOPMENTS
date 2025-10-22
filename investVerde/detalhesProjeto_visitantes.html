@@ -16,6 +16,113 @@
       background: repeating-linear-gradient(45deg,#f1f3f5,#f1f3f5 10px,#e9ecef 10px,#e9ecef 20px);
       border: 1px dashed #cfd4da; border-radius: .75rem;
     }
+
+    /* CSS (adicione ao seu estilo global ou dentro da <style>) */
+    .invest-btn-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    
+    /* Botão principal */
+    .btn-interest {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 999px;
+      font-weight: 600;
+      box-shadow: 0 6px 18px rgba(255, 45, 85, 0.18);
+      cursor: pointer;
+      transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+      font-size: 0.95rem;
+    }
+    
+    /* Ícone de coração */
+    .btn-interest .heart-icon {
+      font-size: 1.15rem;
+      line-height: 1;
+      display: inline-block;
+      transform-origin: center;
+      /* pulso suave */
+      transition: transform 160ms ease;
+    }
+    
+    /* Hover / foco */
+    .btn-interest:hover,
+    .btn-interest:focus {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(255, 45, 85, 0.22);
+      text-decoration: none;
+      outline: none;
+    }
+    
+    .btn-interest:active {
+      transform: translateY(-1px) scale(0.995);
+    }
+    
+    /* Pequena animação de 'batida' quando focado por teclado (acessibilidade) */
+    .btn-interest:focus .heart-icon {
+      animation: heartbeat 700ms ease;
+    }
+    
+    /* Responsivo - reduz texto em telas pequenas */
+    @media (max-width: 420px) {
+      .btn-interest { padding: 0.5rem; border-radius: 12px; }
+    }
+    
+    /* Keyframes para batimento */
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.18); }
+      50% { transform: scale(0.95); }
+      70% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    /* Ícone de coração */
+    .btn-interest .heart-icon {
+      font-size: 1.15rem;
+      line-height: 1;
+      display: inline-block;
+      transform-origin: center;
+      /* pulso suave */
+      transition: transform 160ms ease;
+    }
+    
+    /* Hover / foco */
+    .btn-interest:hover,
+    .btn-interest:focus {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(255, 45, 85, 0.22);
+      text-decoration: none;
+      outline: none;
+    }
+    
+    .btn-interest:active {
+      transform: translateY(-1px) scale(0.995);
+    }
+    
+    /* Pequena animação de 'batida' quando focado por teclado (acessibilidade) */
+    .btn-interest:focus .heart-icon {
+      animation: heartbeat 700ms ease;
+    }
+    
+    /* Responsivo - reduz texto em telas pequenas */
+    @media (max-width: 420px) {
+      .interest-text { display: none; }
+      .btn-interest { padding: 0.5rem; border-radius: 12px; }
+    }
+    
+    /* Keyframes para batimento */
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.18); }
+      50% { transform: scale(0.95); }
+      70% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
   </style>
 </head>
 <body class="bg-light">
@@ -184,12 +291,12 @@
 
           <div class="card mb-3">
             <div class="card-body">
-              <h6 class="card-title">Documentação e Relatórios</h6>
-              <ul class="mb-0">
-                <li>Plano de Execução</li>
-                <li>Orçamento Planejado</li>
-                <li>Fotos da Área</li>
-              </ul>
+              <div class="invest-btn-wrapper">
+                <button class="btn-interest btn btn-success" aria-label="Tenho interesse em investir">
+                  <i class="bi bi-heart-fill heart-icon" aria-hidden="true"></i>
+                  <span class="interest-text">Tenho interesse</span>
+                </button>
+              </div>
             </div>
           </div>
         `;
