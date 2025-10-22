@@ -44,22 +44,22 @@
             <label class="form-label mb-1">ODS (selecione até 3)</label>
             <select id="filtroOds" class="form-select" multiple>
               <option value="1">ODS 1</option>
-<option value="2">ODS 2</option>
-<option value="3">ODS 3</option>
-<option value="4">ODS 4</option>
-<option value="5">ODS 5</option>
-<option value="6">ODS 6</option>
-<option value="7">ODS 7</option>
-<option value="8">ODS 8</option>
-<option value="9">ODS 9</option>
-<option value="10">ODS 10</option>
-<option value="11">ODS 11</option>
-<option value="12">ODS 12</option>
-<option value="13">ODS 13</option>
-<option value="14">ODS 14</option>
-<option value="15">ODS 15</option>
-<option value="16">ODS 16</option>
-<option value="17">ODS 17</option>
+              <option value="2">ODS 2</option>
+              <option value="3">ODS 3</option>
+              <option value="4">ODS 4</option>
+              <option value="5">ODS 5</option>
+              <option value="6">ODS 6</option>
+              <option value="7">ODS 7</option>
+              <option value="8">ODS 8</option>
+              <option value="9">ODS 9</option>
+              <option value="10">ODS 10</option>
+              <option value="11">ODS 11</option>
+              <option value="12">ODS 12</option>
+              <option value="13">ODS 13</option>
+              <option value="14">ODS 14</option>
+              <option value="15">ODS 15</option>
+              <option value="16">ODS 16</option>
+              <option value="17">ODS 17</option>
             </select>
           </div>
           <div class="col-sm-6">
@@ -150,6 +150,7 @@
               <div class="mb-2"><strong>ODS que pretende alcançar:</strong><br>
                 ${i.ods.map(o => `<span class="chip">ODS ${o}</span>`).join(" ")}
               </div>
+              <a href="detalhe_investidor.html?id=${p.id}" class="btn btn-custom mt-auto">Ver mais</a>
             </div>
           </div>
         `;
