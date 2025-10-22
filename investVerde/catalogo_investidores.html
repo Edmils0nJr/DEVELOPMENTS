@@ -116,11 +116,12 @@
     const filtroArea = document.getElementById("filtroArea");
     const btnAplicar = document.getElementById("btnAplicar");
     const btnLimpar = document.getElementById("btnLimpar");
+    let listaI = {};
 
     async function carregarInvestidores() {
       try {
         const res = await fetch("https://9tn2xd-3001.csb.app/api/investidores/");
-        const listaI = await res.json();
+        listaI = await res.json();
         if (!res.ok) throw new Error();
         render(listaI);
         console.log(listaI)
@@ -175,7 +176,7 @@
     }}
 
     function atualizar() {{
-      const base = aplicarFiltroTexto(dados, campoBusca.value);
+      const base = aplicarFiltroTexto(listaI, campoBusca.value);
       const filtrado = aplicarFiltrosAvancados(base);
       render(filtrado);
     }}
