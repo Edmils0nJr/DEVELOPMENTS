@@ -138,6 +138,7 @@
       }
       try {
         const res = await fetch("https://9tn2xd-3001.csb.app/api/investidores/" + id);
+        const investidor = await  res.text;
         console.log(res);
         //const investidor = await res.json();
         //console.log(investidor)
