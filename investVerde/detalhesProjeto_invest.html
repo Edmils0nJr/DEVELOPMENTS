@@ -16,6 +16,28 @@
       background: repeating-linear-gradient(45deg,#f1f3f5,#f1f3f5 10px,#e9ecef 10px,#e9ecef 20px);
       border: 1px dashed #cfd4da; border-radius: .75rem;
     }
+    /* CSS para botão flutuante */
+    .btn-interest-fab {
+      position: fixed;
+      right: 20px;
+      bottom: 24px;
+      z-index: 1050;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg,#ff6b6b,#ff2d55);
+      color: #fff;
+      border: none;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      cursor: pointer;
+      transition: transform .12s ease, box-shadow .12s ease;
+      font-size: 1.35rem;
+    }
+    .btn-interest-fab:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(0,0,0,0.22); }
+
   </style>
 </head>
 <body class="bg-light">
