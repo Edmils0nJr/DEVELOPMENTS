@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalhe do Investidor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link href="css/estilo.css" rel="stylesheet" />
+  <style>
+    body { background-color: #f5f8f4; }
+    .box { max-width: 860px; }
+    .avatar { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; border: 2px solid #e9ecef; }
+    .section-title { font-weight: 700; color: #00745C; }
+    .badge-ods { background: #e6fff7; color: #00745C; border: 1px solid #bff0df; }
+    .pill { display:inline-block; padding:.35rem .6rem; border-radius:2rem; border:1px solid #dbe7e3; background:#ffffff; }
+    /* Componente visual de submissão (HTML + CSS puros) */
+    .submit-card { border:2px dashed #b6dfd3; background:#ecfbf6; }
+    .submit-icon { width:56px; height:56px; border-radius:14px; background:#00745C; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 16px rgba(0,0,0,.08); }
+    .submit-icon i { color:#fff; font-size:26px; }
+    .submit-btn-disabled { cursor:not-allowed; opacity:.7; }
+  </style>
+</head>
+<body>
+  <div class="container py-4 box">
+    <div class="text-center mb-4">
+      <img src="https://raw.githubusercontent.com/Edmils0nJr/DEVELOPMENTS/main/css/logo.png" alt="Logo" style="height:50px"/>
+    </div>
+
+    <div id="conteudo"></div>
+
+    <div class="text-center mt-4">
+      <a href="catalogo_investidor.html" class="btn btn-success">Voltar</a>
+    </div>
+  </div>
+
+  <script>
+    function nivelToPercent(n){ return Math.round(n/5*100) }
+
+    function avatarUrl(from){
+      return `https://api.dicebear.com/8.x/initials/svg?seed=${encodeURIComponent(from||'Investidor')}`;
+    }
+
+    function render(invest){
+      const nome = invest.nome;
+      const email = invest.email;
+      const telefone = invest.telefone;
+      const foto = invest.img;
+      const desc = invest.desc;
+      const ods = Array.isArray(invest.ods) ? invest.ods : [];
+      const areas = Array.isArray(invest.areas) ? invest.areas : (Array.isArray(invest.areas_interesse)? invest.areas_interesse: []);
+      //const verificado = !!(invest.verificado || invest.validado);
+      const nivel = 5;
+      const nivelPct = nivelToPercent(nivel);
+
+      let progressClass = 'bg-secondary';
+      if(nivelPct>=75) progressClass='bg-success'; else if(nivelPct>=40) progressClass='bg-warning'; else if(nivelPct>0) progressClass='bg-danger';
+
+      const odsHtml = ods.map(id=>`<span class="badge badge-ods rounded-pill me-1 mb-1">ODS ${id}</span>`).join('') || '<span class="text-muted">Sem ODS preferidos</span>';
+      const areasHtml = areas.map(a=>`<span class="pill me-1 mb-1">${a}</span>`).join('') || '<span class="text-muted">Sem áreas informadas</span>';
+
+      document.getElementById('conteudo').innerHTML = `
+        <!-- Cabeçalho Investidor -->
+        <div class="card mb-3">
+          <div class="card-body d-flex align-items-center gap-3">
+            <img class="avatar" src="${foto}" alt="Foto do investidor"/>
+            <div class="flex-fill">
+              <h5 class="mb-1">${nome}</h5>
+              <div class="small text-muted">${email}${telefone? ' • '+telefone : ''}</div>
+            </div>
+            <span class="badge bg-success">
+              <i class="bi bi-patch-check-fill me-1"></i>Verificado
+            </span>
+          </div>
+        </div>
+
+        <!-- Sobre / Preferências -->
+        <div class="row">
+          <div class="col-md-7">
+            <div class="card mb-3">
+              <div class="card-body">
+                <h6 class="section-title mb-2">Sobre o investidor</h6>
+                <p class="mb-0">${desc || '<span class="text-muted">Sem descrição.</span>'}</p>
+              </div>
+            </div>
+
+            <div class="card mb-3">
+              <div class="card-body">
+                <h6 class="section-title mb-2">Áreas de interesse</h6>
+                <div>${areasHtml}</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="card mb-3">
+              <div class="card-body">
+                <h6 class="section-title mb-2">ODS Prioritárias</h6>
+                <div>${odsHtml}</div>
+              </div>
+            </div>
+
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h6 class="section-title mb-0">Nível de segurança</h6>
+                  <small class="text-muted">${nivel==null? 'Não informado' : (typeof nivel==='number' && nivel<=5? `Nível ${nivel}/5` : (typeof nivel==='number'? `${nivel}%` : String(nivel)))}</small>
+                </div>
+                <div class="progress" role="progressbar" aria-valuenow="${nivelPct}" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar ${progressClass}" style="width:${nivelPct}%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submissão de Projeto (somente UI, não funcional) -->
+        <div class="card submit-card mb-3">
+          <div class="card-body d-flex align-items-center gap-3">
+            <div class="submit-icon flex-shrink-0"><i class="bi bi-cloud-arrow-up"></i></div>
+            <div class="flex-fill">
+              <h6 class="mb-1">Submeter um projeto para este investidor</h6>
+              <div class="text-muted small">Em breve: anexe sua apresentação, orçamento e descrição para enviar uma proposta direcionada.</div>
+            </div>
+            <button class="btn btn-success submit-btn-disabled" disabled>
+              <i class="bi bi-send"></i> Enviar proposta
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    (async () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      if(!id){
+        document.getElementById('conteudo').innerHTML = "<div class='alert alert-warning'>ID do investidor não informado na URL (?id=).</div>";
+        return;
+      }
+      try {
+        const res = await fetch("https://9tn2xd-3001.csb.app/api/investidores/" + id);
+        console.log(res);
+        //const investidor = await res.json();
+        //console.log(investidor)
+        //render(investidor);
+      } catch (e){
+        console.error(e);
+        document.getElementById('conteudo').innerHTML = "<div class='alert alert-danger'>Não foi possível carregar os dados do investidor.</div>";
+      }
+    })();
+  </script>
+</body>
+</html>
