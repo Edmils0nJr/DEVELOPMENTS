@@ -139,10 +139,10 @@
       try {
         const res = await fetch("https://9tn2xd-3001.csb.app/api/investidores/" + id);
         const investidor = await  res.json();
-        console.log(investidor);
+        //console.log(investidor);
         //const investidor = await res.json();
         //console.log(investidor)
-        //render(investidor);
+        render(investidor);
       } catch (e){
         console.error(e);
         document.getElementById('conteudo').innerHTML = "<div class='alert alert-danger'>Não foi possível carregar os dados do investidor.</div>";
